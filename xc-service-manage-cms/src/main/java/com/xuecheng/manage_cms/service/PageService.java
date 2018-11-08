@@ -19,6 +19,22 @@ public class PageService {
     @Autowired
     CmsPageRepository cmsPageRepository;
 
+    //删除页面
+    public CmsPageResult delete(String id){
+      if(id==null){
+          return new CmsPageResult(CommonCode.FAIL,null);
+      }
+        CmsPage byId = this.findById(id);
+      if(byId!=null){
+          //继续
+          cmsPageRepository.deleteById(id);
+          return new CmsPageResult(CommonCode.SUCCESS,null);
+      }
+        return new CmsPageResult(CommonCode.FAIL,null);
+    };
+
+
+
     //根据Id查询页面
     public CmsPage findById(String id){
 
@@ -60,7 +76,7 @@ public class PageService {
             repCmsPage.setDataUrl(cmsPage.getDataUrl());
 
             //dao
-            CmsPage insert = cmsPageRepository.insert(repCmsPage);
+            CmsPage insert = cmsPageRepository.save(repCmsPage);
 
             //判断插入成功失败
 

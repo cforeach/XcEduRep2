@@ -16,22 +16,40 @@ public class CmsPageController implements CmsPageControllerApi {
     @Autowired
     PageService pageService;
 
+    //删除
+    @Override
+    @DeleteMapping("/del/{id}")
+    public CmsPageResult delete(@PathVariable("id") String id){
+
+        System.out.println("delete 方法进来了");
+
+        return pageService.delete(id);
+    }
+
+
+
     //根据id查询
     @Override
     @GetMapping("/get/{id}")
     public CmsPage findById(@PathVariable("id") String id) {
         System.out.println("findById function come in");
+        System.out.println(id);
         CmsPage cmsPage = pageService.findById(id);
         return cmsPage;
     }
-
-    //修改页面
     @Override
+    @PutMapping("/edit/{id}")//这里使用put方法，http 方法中put表示更新
+    public CmsPageResult edit(@PathVariable("id")String id, @RequestBody CmsPage cmsPage) {
+        System.out.println("edit function come in");
+        return pageService.update(id,cmsPage);
+    }
+    //修改页面
+  /*  @Override
     @PutMapping("/edit/{id}")
     public CmsPageResult edit(@PathVariable("id") String id,@RequestBody CmsPage cmsPage) {
         System.out.println("edit function come in");
         return pageService.update(id,cmsPage);
-    }
+    }*/
 
     //新增页面
     @Override

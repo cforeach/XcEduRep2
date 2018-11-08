@@ -34,4 +34,8 @@ public interface CmsPageControllerApi {
             @ApiImplicitParam(name = "cmsPage" ,value = "页面容器")
     })
     public CmsPageResult edit(String id, CmsPage cmsPage);
+
+    @ApiOperation("删除页面")
+    @ApiImplicitParam(name = "id", value = "主键id")
+    public CmsPageResult delete(String id);
 }
